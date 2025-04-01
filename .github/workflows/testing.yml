@@ -1,0 +1,35 @@
+name: Testing Pipeline
+
+on:
+  workflow_run:
+    workflows: ["Development Pipeline"]
+    types:
+      - completed
+    branches: [development]
+
+jobs:
+  deploy-test:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment: testing
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download artifact from Development
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: development-pipeline.yml
+          workflow_conclusion: success
+          name: jabberpoint-package
+          path: ./artifacts
+      - name: Run integration tests
+        run: |
+          echo "Running integration tests on the Testing environment"
+          # Add commands to run more comprehensive testing
+      - name: Deploy to Testing
+        run: |
+          echo "Deploying to Testing environment"
+          # Here you would add the actual commands to deploy to your test environment
+          # For example:
+          # - Copy files to test server
+          # - Configure test database
+          # - Set up test data

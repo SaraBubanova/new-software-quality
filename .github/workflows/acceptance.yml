@@ -1,0 +1,38 @@
+name: Acceptance Pipeline
+
+on:
+  workflow_run:
+    workflows: ["Testing Pipeline"]
+    types:
+      - completed
+    branches: [development]
+
+jobs:
+  deploy-acceptance:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment: acceptance
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download artifact from Testing
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: testing-pipeline.yml
+          workflow_conclusion: success
+          name: jabberpoint-package
+          path: ./artifacts
+      - name: Deploy to Acceptance
+        run: |
+          echo "Deploying to Acceptance environment"
+          # Here you would add commands for acceptance environment setup
+          # This environment often mimics production for final validation
+
+      - name: Run user acceptance tests
+        run: |
+          echo "Running user acceptance tests"
+          # Add commands to run automated UAT tests
+
+      - name: Notify stakeholders
+        run: |
+          echo "Notifying stakeholders that application is ready for UAT"
+          # Could use GitHub API or external notification system
