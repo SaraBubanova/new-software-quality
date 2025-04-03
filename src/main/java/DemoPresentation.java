@@ -1,6 +1,5 @@
 import model.Presentation;
 import model.Slide;
-import model.TextItem;
 import model.BitmapItem;
 
 /**
@@ -19,7 +18,7 @@ public class DemoPresentation {
 		Slide slide;
 		slide = new Slide();
 		slide.setTitle("JabberPoint");
-		slide.append(1, "The Java prestentation tool");
+		slide.append(1, "The Java presentation tool");
 		slide.append(2, "Copyright (c) 1996-2000: Ian Darwin");
 		slide.append(2, "Copyright (c) 2000-2003: Gert Florijn");
 		slide.append(2, "Copyright (c) 2003-2010: Sylvia Stuurman");

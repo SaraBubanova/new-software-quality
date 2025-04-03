@@ -1,16 +1,16 @@
-import java.awt.MenuBar;
-import java.awt.Frame;
-import java.awt.Menu;
-import java.awt.MenuItem;
-import java.awt.MenuShortcut;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.io.File;
-
+import javax.swing.JMenuBar;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.io.File;
 
 import commands.Command;
 import commands.CommandInvoker;
@@ -31,9 +31,9 @@ import model.TextItem;
  * @version 1.5 2010/03/03 Sylvia Stuurman
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
-public class MenuController extends MenuBar {
+public class MenuController extends JMenuBar {
 	
-	private Frame parent; // the frame, only used as parent for the Dialogs
+	private JFrame parent; // the frame, only used as parent for the Dialogs
 	private Presentation presentation; // Commands are given to the presentation
 	private CommandInvoker commandInvoker;
 	
@@ -59,12 +59,12 @@ public class MenuController extends MenuBar {
 	protected static final String LOADERR = "Load Error";
 	protected static final String SAVEERR = "Save Error";
 
-	public MenuController(Frame frame, Presentation pres) {
+	public MenuController(JFrame frame, Presentation pres) {
 		parent = frame;
 		presentation = pres;
 		commandInvoker = new CommandInvoker();
-		MenuItem menuItem;
-		Menu fileMenu = new Menu(FILE);
+		JMenuItem menuItem;
+		JMenu fileMenu = new JMenu(FILE);
 		fileMenu.add(menuItem = mkMenuItem(OPEN));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -126,7 +126,7 @@ public class MenuController extends MenuBar {
 			}
 		});
 		add(fileMenu);
-		Menu viewMenu = new Menu(VIEW);
+		JMenu viewMenu = new JMenu(VIEW);
 		viewMenu.add(menuItem = mkMenuItem(NEXT));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -149,18 +149,20 @@ public class MenuController extends MenuBar {
 			}
 		});
 		add(viewMenu);
-		Menu helpMenu = new Menu(HELP);
+		JMenu helpMenu = new JMenu(HELP);
 		helpMenu.add(menuItem = mkMenuItem(ABOUT));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				AboutBox.show(parent);
 			}
 		});
-		setHelpMenu(helpMenu);		// needed for portability (Motif, etc.).
+		add(helpMenu);
 	}
 
 // create a menu item
-	public MenuItem mkMenuItem(String name) {
-		return new MenuItem(name, new MenuShortcut(name.charAt(0)));
+	public JMenuItem mkMenuItem(String name) {
+		JMenuItem menuItem = new JMenuItem(name);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(name.charAt(0), KeyEvent.CTRL_DOWN_MASK));
+		return menuItem;
 	}
 }

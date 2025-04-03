@@ -47,8 +47,12 @@ public class TextItem extends SlideItem {
 
 // geef de AttributedString voor het item
 	public AttributedString getAttributedString(Style style, float scale) {
-		AttributedString attrStr = new AttributedString(getText());
-		attrStr.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, text.length());
+		String textToUse = getText();
+		if (textToUse.isEmpty()) {
+			textToUse = EMPTYTEXT;
+		}
+		AttributedString attrStr = new AttributedString(textToUse);
+		attrStr.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, textToUse.length());
 		return attrStr;
 	}
 
@@ -75,8 +79,9 @@ public class TextItem extends SlideItem {
 // draw the item
 	public void draw(int x, int y, float scale, Graphics g, 
 			Style myStyle, ImageObserver o) {
-		if (text == null || text.length() == 0) {
-			return;
+		String textToUse = getText();
+		if (textToUse.isEmpty()) {
+			textToUse = EMPTYTEXT;
 		}
 		List<TextLayout> layouts = getLayouts(g, myStyle, scale);
 		Point pen = new Point(x + (int)(myStyle.indent * scale), 
@@ -90,16 +95,20 @@ public class TextItem extends SlideItem {
 			layout.draw(g2d, pen.x, pen.y);
 			pen.y += layout.getDescent();
 		}
-	  }
+	}
 
 	private List<TextLayout> getLayouts(Graphics g, Style s, float scale) {
 		List<TextLayout> layouts = new ArrayList<TextLayout>();
+		String textToUse = getText();
+		if (textToUse.isEmpty()) {
+			return layouts;
+		}
 		AttributedString attrStr = getAttributedString(s, scale);
     	Graphics2D g2d = (Graphics2D) g;
     	FontRenderContext frc = g2d.getFontRenderContext();
     	LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);
     	float wrappingWidth = (Slide.WIDTH - s.indent) * scale;
-    	while (measurer.getPosition() < getText().length()) {
+    	while (measurer.getPosition() < textToUse.length()) {
     		TextLayout layout = measurer.nextLayout(wrappingWidth);
     		layouts.add(layout);
     	}
