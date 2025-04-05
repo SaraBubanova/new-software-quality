@@ -15,6 +15,8 @@ public class SlideViewerComponentTest {
 
     @BeforeEach
     void setUp() {
+        // Set up headless mode for tests
+        System.setProperty("java.awt.headless", "true");
         Style.createStyles(); // Initialize styles before creating components
         presentation = new Presentation();
         frame = new JFrame();

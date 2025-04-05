@@ -24,7 +24,8 @@ jobs:
       - name: Run integration tests
         run: |
           echo "Running integration tests on the Testing environment"
-          # Add commands to run more comprehensive testing
+           mvn test -Djava.awt.headless=true
+          # Add any other test commands you need
       - name: Deploy to Testing
         run: |
           echo "Deploying to Testing environment"
