@@ -7,6 +7,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import model.Presentation;
 import model.Slide;
+import java.awt.event.ActionEvent;
+
+import model.TextItem;
 
 public class MenuControllerTest {
     private MenuController menuController;
@@ -82,4 +85,30 @@ public class MenuControllerTest {
         frame.setTitle("Jabberpoint 1.6 - OU");
         assertEquals("Jabberpoint 1.6 - OU", frame.getTitle());
     }
+
+    @Test
+    void testNewMenuItemAction() {
+        JMenu fileMenu = frame.getJMenuBar().getMenu(0);
+        JMenuItem newItem = fileMenu.getItem(1); // New is second item
+
+        // Trigger action
+        newItem.getActionListeners()[0].actionPerformed(
+                new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
+
+        assertEquals(1, presentation.getSize());
+        assertEquals("New Slide", presentation.getSlide(0).getTitle());
+        assertEquals(2, presentation.getSlide(0).getSlideItems().size());
+    }
+
+    @Test
+    void testNextMenuItemAction() {
+        JMenu viewMenu = frame.getJMenuBar().getMenu(1);
+        JMenuItem nextItem = viewMenu.getItem(0); // Next is first item
+
+        assertEquals(0, presentation.getSlideNumber());
+        nextItem.getActionListeners()[0].actionPerformed(
+                new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
+        assertEquals(1, presentation.getSlideNumber());
+    }
+
 } 

@@ -3,8 +3,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigLoader {
-    private static final Properties properties = new Properties();
-    private static boolean loaded = false;
+    static final Properties properties = new Properties();
+    static boolean loaded = false;
 
     public static void loadConfig() {
         if (loaded) {

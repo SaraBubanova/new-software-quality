@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Vector;
 
 /**
@@ -109,4 +110,4 @@ public class Slide {
         float yScale = (float) (area.height - 2 * MARGIN) / (float) HEIGHT;
         return Math.min(xScale, yScale);
     }
-} 
+}

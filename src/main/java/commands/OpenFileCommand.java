@@ -11,9 +11,9 @@ import java.io.IOException;
  * Command to open a presentation file
  */
 public class OpenFileCommand implements Command {
-    private final Presentation presentation;
-    private final Frame parent;
-    private final String filename;
+    final Presentation presentation;
+    final Frame parent;
+    final String filename;
 
     public OpenFileCommand(Presentation presentation, Frame parent, String filename) {
         this.presentation = presentation;
