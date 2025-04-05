@@ -34,7 +34,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven and production profile
-        run: mvn -B package -Pprod --file pom.xml
+        run: mvn -B package -Pprod
       - name: Store production artifacts
         uses: actions/upload-artifact@v4
         with:

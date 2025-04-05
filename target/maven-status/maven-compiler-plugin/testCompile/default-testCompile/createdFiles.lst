@@ -4,12 +4,15 @@ BitmapItemTest.class
 TextItemTest.class
 BitmapItemTest$1.class
 TextItemTest$1.class
+ConfigLoaderTest.class
 AboutBoxTest.class
 SlideItemTest.class
+ConfigLoaderTest$TestClassLoader$1.class
 SlideTest$1.class
 SlideItemTest$TestSlideItem.class
 JabberPointTest.class
 SlideViewerComponentTest.class
+ConfigLoaderTest$TestClassLoader.class
 MenuControllerTest.class
 KeyControllerTest.class
 SlideItemTest$1.class

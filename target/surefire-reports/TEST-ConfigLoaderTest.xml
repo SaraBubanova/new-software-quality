@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="MenuControllerTest" time="0.046" tests="9" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="ConfigLoaderTest" time="0.122" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="24"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -60,13 +60,10 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="68.0"/>
   </properties>
-  <testcase name="testNextMenuItemAction" classname="MenuControllerTest" time="0.006"/>
-  <testcase name="testMenuControllerCreation" classname="MenuControllerTest" time="0.006"/>
-  <testcase name="testFrameTitle" classname="MenuControllerTest" time="0.005"/>
-  <testcase name="testFileMenuItems" classname="MenuControllerTest" time="0.004"/>
-  <testcase name="testMenuBarStructure" classname="MenuControllerTest" time="0.004"/>
-  <testcase name="testPresentationTitle" classname="MenuControllerTest" time="0.004"/>
-  <testcase name="testNewMenuItemAction" classname="MenuControllerTest" time="0.003"/>
-  <testcase name="testHelpMenuItems" classname="MenuControllerTest" time="0.004"/>
-  <testcase name="testPresentationSlides" classname="MenuControllerTest" time="0.003"/>
+  <testcase name="getProperty_shouldReturnNullForNonexistentKey" classname="ConfigLoaderTest" time="0.106"/>
+  <testcase name="loadConfig_shouldNotReloadWhenAlreadyLoaded" classname="ConfigLoaderTest" time="0.004"/>
+  <testcase name="loadConfig_shouldHandleMissingConfigFileGracefully" classname="ConfigLoaderTest" time="0.005">
+    <system-out><![CDATA[Sorry, unable to find config-nonexistent.properties
+]]></system-out>
+  </testcase>
 </testsuite>
